@@ -33,6 +33,8 @@ class KivyRecipe(CythonRecipe):
     # See: https://github.com/kivy/kivy/pull/8025
     # WARNING: Remove this patch when a new Kivy version is released.
     patches = [("sdl-gl-swapwindow-nogil.patch", is_kivy_affected_by_deadlock_issue)]
+    # Yuanjie: certifi recipe does not exist. pip-based installation crashes...
+    # python_depends = ['certifi'] 
 
     def cythonize_build(self, env, build_dir='.'):
         super().cythonize_build(env, build_dir=build_dir)
