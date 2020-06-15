@@ -1,3 +1,17 @@
+Special Edition for MobileInsight
+================================
+
+The changes made to the original python-for-android project include:
+
++ added `mobileinsight` recipe.
+
+## Note
+
++ For developers: to debug the mobileInsight-desktop locally without
+pushing to remote repo, go to `python-for-android/pythonforandroid/recipes/mobileinsight/__init__.py`,
+and change line 9 and line 10 according to the instructions. Then re-install
+python-for-android.
+
 # python-for-android
 
 python-for-android (p4a) is a development tool that packages Python apps into
