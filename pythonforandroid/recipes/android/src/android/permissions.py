@@ -484,8 +484,8 @@ class _RequestPermissionsManager:
     def register_callback(cls):
         """Register Java callback for requestPermissions."""
         cls._java_callback = _onRequestPermissionsCallback(cls.python_callback)
-        python_activity = autoclass('org.kivy.android.PythonActivity')
-        python_activity.addPermissionsCallback(cls._java_callback)
+        mActivity = autoclass('org.kivy.android.PythonActivity').mActivity
+        mActivity.addPermissionsCallback(cls._java_callback)
 
     @classmethod
     def request_permissions(cls, permissions, callback=None):
@@ -508,12 +508,12 @@ class _RequestPermissionsManager:
         with cls._lock:
             if not cls._java_callback:
                 cls.register_callback()
-            python_activity = autoclass('org.kivy.android.PythonActivity')
+            mActivity = autoclass('org.kivy.android.PythonActivity').mActivity
             if not callback:
-                python_activity.requestPermissions(permissions)
+                mActivity.requestPermissions(permissions)
             else:
                 cls._callback_id += 1
-                python_activity.requestPermissionsWithRequestCode(
+                mActivity.requestPermissionsWithRequestCode(
                     permissions, cls._callback_id)
                 cls._callbacks[cls._callback_id] = callback
 
@@ -583,8 +583,8 @@ def check_permission(permission):
     Returns:
         bool: True if the app holds the permission given, False otherwise.
     """
-    python_activity = autoclass('org.kivy.android.PythonActivity')
-    result = bool(python_activity.checkCurrentPermission(
+    mActivity = autoclass('org.kivy.android.PythonActivity').mActivity
+    result = bool(mActivity.checkCurrentPermission(
         permission + ""
     ))
     return result
