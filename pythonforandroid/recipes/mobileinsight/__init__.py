@@ -26,7 +26,7 @@ class MobileInsightRecipe(Recipe):
         # [WARNING]: get_newest_toolchain(self, arch), toolchain prefix = arm-linux-androideabi
 
         toolchain_versions = []
-        toolchain_prefix = arch.toolchain_prefix
+        toolchain_prefix = arch.command_prefix
         toolchain_path = join(self.ctx.ndk_dir, 'toolchains')
         if isdir(toolchain_path):
             toolchain_contents = glob.glob('{}/{}-*'.format(toolchain_path,
@@ -147,7 +147,7 @@ class MobileInsightRecipe(Recipe):
                 _tail=20,
                 _critical=True)
 
-        self.get_newest_toolchain(arch)
+        # self.get_newest_toolchain(arch)
 
     def build_arch(self, arch):
         super(MobileInsightRecipe, self).build_arch(arch)
